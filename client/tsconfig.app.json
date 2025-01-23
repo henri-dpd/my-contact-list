@@ -23,15 +23,6 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
     "paths": {
-      "@core/*": [
-        "core/*"
-      ],
-      "@modules/*": [
-        "modules/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
       "@/*": [
         "./*"
       ]

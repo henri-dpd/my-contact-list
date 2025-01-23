@@ -1,5 +1,5 @@
 import { Img } from 'react-image';
-import LoadingIcon from '../../assets/loading.png';
+import LoadingIcon from '@/assets/loading.png';
 
 interface Props {
   loading: boolean;

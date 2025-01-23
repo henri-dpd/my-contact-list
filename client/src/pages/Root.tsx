@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import Loading from '../core/components/Loading';
+import Loading from '../core/components/Loading/Loading';
 
 const Root: React.FC = () => {
   return (
