@@ -6,7 +6,7 @@ import LoadingProvider from './core/components/Loading/LoadingProviders';
 function App() {
   return (
     <LoadingProvider>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </LoadingProvider>
   );
 }

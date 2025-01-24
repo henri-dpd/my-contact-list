@@ -16,6 +16,7 @@ const DashboardContainer: React.FC = () => {
     <DashboardProvider>
       <div className="w-full h-full">
         <Header onSearch={handleSearch} />
+        <br />
         <List onAdd={handleAdd} onLoadMore={handleLoadMore} />
         <DashboardBootstrap />
       </div>
