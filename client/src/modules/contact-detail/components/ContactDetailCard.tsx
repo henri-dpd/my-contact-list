@@ -1,5 +1,8 @@
 import React from 'react';
 import { useContactDetailContext } from '../context/useContactDetailContext';
+import ContactBiography from './ContactBiography';
+import ContactInformation from './ContactInformation';
+import Loading from '@/core/components/Loading/Loading';
 
 interface Props {
   onEdit?: VoidFunction;
@@ -7,12 +10,19 @@ interface Props {
 }
 
 const ContactDetailCard: React.FC<Props> = () => {
-  const { state } = useContactDetailContext();
+  const {
+    state: { contact },
+  } = useContactDetailContext();
+  if (!contact) return <Loading loading />;
   return (
-    <div className="contact-detail-card">
-      <h1 className="text-3xl font-bold mb-4">{state.contact?.name}</h1>
-      <p>Phone: {state.contact?.phoneNumber}</p>
-      <p>Bio: {state.contact?.biography}</p>
+    <div className="flex flex-col justify-start gap-4 sm:gap-8">
+      <ContactInformation
+        name={contact!.name}
+        image={contact!.image}
+        phone={contact!.phoneNumber}
+      />
+      <hr className="border-primarystrong" />
+      <ContactBiography biography={contact!.biography} />
     </div>
   );
 };

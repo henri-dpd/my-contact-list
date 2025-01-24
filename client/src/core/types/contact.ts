@@ -2,7 +2,7 @@ export type Contact = {
   id: string;
   name: string;
   image?: string;
-  phoneNumber: number;
+  phoneNumber: string;
   biography: string;
 };
 
