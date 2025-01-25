@@ -10,6 +10,8 @@ export const DashboardReducer = (
       return { ...state, ...action.payload };
     case 'SET_SEARCH':
       return { ...state, search: action.payload };
+    case 'SET_PAGE':
+      return { ...state, page: action.payload };
     default:
       return state;
   }
