@@ -1,7 +1,7 @@
 import ApiService from '@/core/service/api.service.ts';
 import { Contact } from '@/core/types/contact';
 import { PaginatedData } from '@/core/types/service';
-import { ListContactDTO } from '../types/contactTypes';
+import { CreateContactDTO, ListContactDTO } from '../types/contactTypes';
 
 class ContactService extends ApiService {
   constructor() {
@@ -24,7 +24,7 @@ class ContactService extends ApiService {
     return this.patch<Contact>(`/${id}`, newContact);
   };
 
-  createContact = async (newContact: Contact) => {
+  createContact = async (newContact: CreateContactDTO) => {
     return this.post<Contact>(`/`, newContact);
   };
 
