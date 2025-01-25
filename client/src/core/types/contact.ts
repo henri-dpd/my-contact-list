@@ -11,3 +11,9 @@ export type ContactItem = {
   name: string;
   image?: string;
 };
+
+export type ContactSchema = {
+  name: string;
+  phone: string;
+  biography?: string;
+};

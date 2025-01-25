@@ -26,9 +26,9 @@ const useFetchContactDetail = (id?: string) => {
         type: 'SET_DATA',
         payload: data,
       });
-      console.log(data);
     } catch (error) {
       handleError(error as ResponseError);
+      navigate(-1);
     } finally {
       setLoading(false);
     }

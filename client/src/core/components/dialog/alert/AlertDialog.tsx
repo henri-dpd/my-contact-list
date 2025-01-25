@@ -5,10 +5,10 @@ import { Variant } from '@/core/types/theme';
 
 interface AlertDialogProps {
   open: boolean;
-  onAcept: VoidFunction;
   variant?: Variant;
   title: string;
   message: string;
+  onClose: VoidFunction;
 }
 
 const AlertDialog: React.FC<AlertDialogProps> = ({
@@ -16,15 +16,16 @@ const AlertDialog: React.FC<AlertDialogProps> = ({
   title,
   message,
   variant = 'light',
-  onAcept,
+  onClose
 }) => {
   return (
     <Dialog
       title={title}
       open={open}
       variant={variant}
+      onClose={onClose}
       actions={
-        <Button variant={variant} onClick={onAcept}>
+        <Button variant={variant} onClick={onClose}>
           Acept
         </Button>
       }

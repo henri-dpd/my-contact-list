@@ -39,7 +39,7 @@ export const AlertDialogProvider: React.FC<AlertDialogProviderProps> = ({
       <AlertDialog
         open={open}
         title={dialogTitle}
-        onAcept={handleClose}
+        onClose={handleClose}
         variant={dialogVariant}
         message={dialogMessage}
       />

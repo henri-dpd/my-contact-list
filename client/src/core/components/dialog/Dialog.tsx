@@ -1,12 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ColorTheme, Variant } from '@/core/types/theme';
-interface DialogProps {
-  title?: string;
-  open: boolean;
-  actions: React.ReactNode;
-  children: React.ReactNode;
-  variant?: Variant;
-}
 
 const DIALOG_THEME: Record<Variant, ColorTheme> = {
   light: {
@@ -28,6 +21,14 @@ const DIALOG_THEME: Record<Variant, ColorTheme> = {
     border: 'border-light',
   },
 };
+interface DialogProps {
+  title?: string;
+  open: boolean;
+  onClose?: VoidFunction;
+  actions?: React.ReactNode;
+  children: React.ReactNode;
+  variant?: Variant;
+}
 
 const Dialog: React.FC<DialogProps> = ({
   title,
@@ -35,7 +36,12 @@ const Dialog: React.FC<DialogProps> = ({
   actions,
   variant = 'dark',
   children,
+  onClose,
 }) => {
+  useEffect(() => {
+    document.getElementById('dialog-content')?.focus();
+  }, [open]);
+
   return (
     <dialog
       className="relative z-10"
@@ -48,13 +54,19 @@ const Dialog: React.FC<DialogProps> = ({
         aria-hidden="true"
       ></div>
 
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div
+        className="fixed inset-0 z-10 w-screen overflow-y-auto"
+        onMouseDown={onClose}
+      >
         <div className="relative flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <div
+            id="dialog-content"
             className={`relative z-20 ${DIALOG_THEME[variant].bg} ${DIALOG_THEME[variant].border} ${DIALOG_THEME[variant].color} transform overflow-hidden rounded-lg text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg`}
+            tabIndex={0}
+            onMouseDown={(e) => e.stopPropagation()}
           >
-            <h3 className="text-xl font-bold mb-1 pl-4 pt-8">{title}</h3>
-            <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">{children}</div>
+            <h3 className="text-xl font-bold mb-1 px-4 pt-8">{title}</h3>
+            <div className="px-4 px-4 sm:p-6 sm:pb-4">{children}</div>
             <div className="px-4 py-3 sm:flex sm:flex-row sm:px-6 gap-4 justify-center">
               {actions}
             </div>

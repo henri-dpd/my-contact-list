@@ -6,14 +6,27 @@ import useLoading from '@/core/components/Loading/useLoading';
 import contactService from '@/modules/dashboard/service/contacts.service';
 import { ResponseError } from '@/core/types/service';
 import useHandleErrors from '@/core/hooks/useHandleErrors';
+import Dialog from '@/core/components/dialog/Dialog';
+import UserRegistrationForm from '@/modules/contact-form/container/ContactFormContainer';
+import { editContactSchema } from '../schema/editContactSchema';
+import { useState } from 'react';
+import { ContactSchema } from '@/core/types/contact';
 
 const ContactDetailContainer: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { setLoading } = useLoading();
   const handleError = useHandleErrors();
+  const [openEditContactForm, setOpenEditContactForm] = useState(false);
 
-  const handleOnEdit = () => {};
+  const handleEdit = () => {
+    setOpenEditContactForm(true);
+  };
+
+  const handleOnEditContact = (data: ContactSchema) => {
+    console.log(data);
+  };
+
   const handleOnDelete = async () => {
     if (!id) {
       handleError({ message: "Id doesn't exists" });
@@ -33,8 +46,18 @@ const ContactDetailContainer: React.FC = () => {
 
   return (
     <ContactDetailProvider>
-      <ContactDetailCard onEdit={handleOnEdit} onDelete={handleOnDelete} />
+      <ContactDetailCard onEdit={handleEdit} onDelete={handleOnDelete} />
       <ContactDetailBootstrap id={id} />
+      <Dialog
+        title="Create a New Contact"
+        open={openEditContactForm}
+        onClose={() => setOpenEditContactForm(false)}
+      >
+        <UserRegistrationForm
+          onSubmit={handleOnEditContact}
+          contactSchema={editContactSchema}
+        />
+      </Dialog>
     </ContactDetailProvider>
   );
 };

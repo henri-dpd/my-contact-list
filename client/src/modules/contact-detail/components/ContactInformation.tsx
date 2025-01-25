@@ -8,6 +8,7 @@ interface ContactInformationProps {
   image?: string;
   phone: string;
   onDelete?: VoidFunction;
+  onEdit?: VoidFunction;
 }
 
 const ContactInformation: React.FC<ContactInformationProps> = ({
@@ -15,6 +16,7 @@ const ContactInformation: React.FC<ContactInformationProps> = ({
   image,
   phone,
   onDelete,
+  onEdit,
 }) => {
   return (
     <div className="flex sm:flex-row flex-col justify-start gap-4 sm:gap-8">
@@ -27,7 +29,7 @@ const ContactInformation: React.FC<ContactInformationProps> = ({
           <span className="text-darkgrey font-bold">{formatPhone(phone)}</span>
         </div>
         <div className="flex flex-row justify-end gap-8">
-          <Button>Edit</Button>
+          <Button onClick={onEdit}>Edit</Button>
           <Button onClick={onDelete}>Delete</Button>
         </div>
       </div>
