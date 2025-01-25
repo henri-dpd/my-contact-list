@@ -1,19 +1,15 @@
 import { useEffect } from 'react';
-import { contactDetail } from '../mock/contactDetail';
-import { useContactDetailContext } from '../context/useContactDetailContext';
-import { useNavigate } from 'react-router-dom';
+import useFetchContactDetail from '../hooks/useFetchContactDetail';
 
 interface Props {
   id?: string;
 }
 
 const ContactDetailBootstrap: React.FC<Props> = ({ id }) => {
-  const { dispatch } = useContactDetailContext();
-  const navigate = useNavigate();
+  const fetchContactDetail = useFetchContactDetail(id);
 
   useEffect(() => {
-    if (!id) navigate(-1);
-    dispatch({ type: 'SET_DATA', payload: contactDetail });
+    fetchContactDetail();
   }, []);
 
   return <></>;

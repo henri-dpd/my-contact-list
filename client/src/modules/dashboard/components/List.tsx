@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDashboardContext } from '../context/useDashboardContext';
 import Button from '@/core/components/button/Button';
-import ClickableCard from '@/core/components/Cards/ClickableCard';
+import ClickableCard from '@/core/components/cards/ClickableCard';
 import Plus from '@/assets/plus.png';
 import { useNavigate } from 'react-router-dom';
 

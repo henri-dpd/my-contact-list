@@ -1,4 +1,5 @@
-import { PaginatedData, ContactItem } from "@/core/types/contact";
+import { ContactItem } from '@/core/types/contact';
+import { PaginatedData } from '@/core/types/service';
 
 export interface DashboardState extends PaginatedData<ContactItem> {
   search?: string;

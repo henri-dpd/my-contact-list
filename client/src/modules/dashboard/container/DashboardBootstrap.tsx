@@ -1,16 +1,12 @@
 import { useEffect } from 'react';
-import { contactList } from '../mock/contactList';
-import { useDashboardContext } from '../context/useDashboardContext';
+import useFetchContactList from '../hooks/useFetchContactList';
 
 const DashboardBootstrap: React.FC = () => {
-  const { dispatch } = useDashboardContext();
+  const fetchContactList = useFetchContactList();
 
   useEffect(() => {
-    dispatch({
-      type: 'SET_DATA',
-      payload: { items: contactList, page: 1, total: 3 },
-    });
-  }, []);
+    fetchContactList();
+  }, [fetchContactList]);
 
   return <></>;
 };

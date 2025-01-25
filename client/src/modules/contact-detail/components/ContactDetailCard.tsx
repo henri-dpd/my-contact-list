@@ -9,7 +9,7 @@ interface Props {
   onDelete?: VoidFunction;
 }
 
-const ContactDetailCard: React.FC<Props> = () => {
+const ContactDetailCard: React.FC<Props> = ({ onDelete }) => {
   const {
     state: { contact },
   } = useContactDetailContext();
@@ -19,7 +19,8 @@ const ContactDetailCard: React.FC<Props> = () => {
       <ContactInformation
         name={contact!.name}
         image={contact!.image}
-        phone={contact!.phoneNumber}
+        phone={contact!.phone}
+        onDelete={onDelete}
       />
       <hr className="border-primarystrong" />
       <ContactBiography biography={contact!.biography} />
