@@ -8,6 +8,8 @@ export default {
       primarystrong: '#cba221',
       background: '#fef6de',
       backgroundstrong: '#fe820e',
+      success: '#4bb543',
+      error: '#d32f2f',
       black: '#000000',
       dark: '#141414',
       darkgrey: '#434343',
