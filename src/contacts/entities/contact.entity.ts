@@ -4,12 +4,12 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 export class Contact {
   @PrimaryGeneratedColumn()
   id: string;
-  @Column()
+  @Column({ type: 'text' })
   name: string;
-  @Column({ nullable: true })
+  @Column({ type: 'longblob', nullable: true })
   image?: string;
-  @Column()
+  @Column({ type: 'text' })
   phone: string;
-  @Column({ nullable: true })
+  @Column({ type: 'longtext', nullable: true })
   biography: string;
 }

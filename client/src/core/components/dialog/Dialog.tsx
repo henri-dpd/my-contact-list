@@ -67,7 +67,7 @@ const Dialog: React.FC<DialogProps> = ({
           >
             <h3 className="text-xl font-bold mb-1 px-4 pt-8">{title}</h3>
             <div className="px-4 px-4 sm:p-6 sm:pb-4">{children}</div>
-            <div className="px-4 py-3 sm:flex sm:flex-row sm:px-6 gap-4 justify-center">
+            <div className="px-4 py-3 flex sm:flex-row sm:px-6 gap-4 justify-center flex-wrap">
               {actions}
             </div>
           </div>

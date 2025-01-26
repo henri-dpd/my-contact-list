@@ -4,6 +4,8 @@ import Button from '@/core/components/button/Button';
 import ClickableCard from '@/core/components/cards/ClickableCard';
 import Plus from '@/assets/plus.png';
 import { useNavigate } from 'react-router-dom';
+import { Img } from 'react-image';
+import EmptyContacts from '@/assets/contacts.png';
 
 interface Props {
   onAdd: VoidFunction;
@@ -20,7 +22,12 @@ const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
         Add User
       </Button>
       <br />
-      <div className="flex flex-row flex-wrap justify-start items-start">
+      <div className="flex flex-row flex-wrap justify-start items-start w-full ">
+        {state.items && state.items.length === 0 && (
+          <div className="w-full flex justify-center items-center">
+            <Img src={EmptyContacts} alt="Contact List Empty" />
+          </div>
+        )}
         {state.items?.map((item) => (
           <ClickableCard
             text={item.name}
