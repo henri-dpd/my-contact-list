@@ -1,5 +1,5 @@
 import { DashboardProvider } from '../context/provider';
-import Dashboard from './DashBoad';
+import Dashboard from './Dashboard';
 import DashboardBootstrap from './DashboardBootstrap';
 
 const DashboardContainer: React.FC = () => {
