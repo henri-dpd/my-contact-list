@@ -8,17 +8,23 @@ import Input from '@/core/components/inputs/Input';
 import TextArea from '@/core/components/inputs/TextArea';
 
 interface Props {
+  initalData?: ContactSchema;
   contactSchema: ObjectSchema<ContactSchema>;
   onSubmit: (data: ContactSchema) => void;
 }
 
-const UserRegistrationForm: React.FC<Props> = ({ contactSchema, onSubmit }) => {
+const UserRegistrationForm: React.FC<Props> = ({
+  contactSchema,
+  initalData,
+  onSubmit,
+}) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactSchema),
+    defaultValues: initalData,
   });
 
   return (

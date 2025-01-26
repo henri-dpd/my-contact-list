@@ -2,7 +2,6 @@ import React from 'react';
 import { useContactDetailContext } from '../context/useContactDetailContext';
 import ContactBiography from './ContactBiography';
 import ContactInformation from './ContactInformation';
-import Loading from '@/core/components/Loading/Loading';
 
 interface Props {
   onEdit?: VoidFunction;
@@ -13,7 +12,7 @@ const ContactDetailCard: React.FC<Props> = ({ onEdit, onDelete }) => {
   const {
     state: { contact },
   } = useContactDetailContext();
-  if (!contact) return <Loading loading />;
+
   return (
     <div className="flex flex-col justify-start gap-4 sm:gap-8">
       <ContactInformation

@@ -20,7 +20,7 @@ class ContactService extends ApiService {
     return this.get<Contact>(`/${id}`);
   };
 
-  edirContact = async (id: string | number, newContact: Partial<Contact>) => {
+  editContact = async (id: string | number, newContact: Partial<CreateContactDTO>) => {
     return this.patch<Contact>(`/${id}`, newContact);
   };
 

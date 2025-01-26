@@ -30,6 +30,9 @@ const Dashboard: React.FC = () => {
   const handleAdd = () => {
     setOpenNewContactForm(true);
   };
+  const handleCloseDialog = () => {
+    setOpenNewContactForm(false);
+  };
 
   const handleLoadMore = () => {
     dispatch({ type: 'SET_PAGE', payload: page * 10 < total ? page + 1 : 1 });
@@ -42,7 +45,7 @@ const Dashboard: React.FC = () => {
       dispatch({ type: 'SET_PAGE', payload: 1 });
       await fetchContactList();
       setLoading(false);
-      setOpenNewContactForm(false);
+      handleCloseDialog();
     } catch (error) {
       handleError(error as ResponseError);
     } finally {
@@ -58,7 +61,7 @@ const Dashboard: React.FC = () => {
       <Dialog
         title="Create a New Contact"
         open={openNewContactForm}
-        onClose={() => setOpenNewContactForm(false)}
+        onClose={handleCloseDialog}
       >
         <UserRegistrationForm
           contactSchema={newContactSchema}
