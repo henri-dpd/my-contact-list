@@ -12,6 +12,7 @@ import { ContactSchema } from '@/core/types/contact';
 import useFetchContactDetail from '../hooks/useFetchContactDetail';
 import { useContactDetailContext } from '../context/useContactDetailContext';
 import Loading from '@/core/components/Loading/Loading';
+import Button from '@/core/components/button/Button';
 
 interface Props {
   id?: string;
@@ -22,6 +23,7 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
   const { setLoading } = useLoading();
   const handleError = useHandleErrors();
   const [openEditContactForm, setOpenEditContactForm] = useState(false);
+  const [openDeleteContactDialog, setOpenDeleteContactDialog] = useState(false);
   const fetchContactDetail = useFetchContactDetail(id);
   const {
     state: { contact },
@@ -52,6 +54,13 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
     }
   };
 
+  const handleOpenDeleteDialog = async () => {
+    setOpenDeleteContactDialog(true);
+  };
+  const handleCloseDeleteDialog = async () => {
+    setOpenDeleteContactDialog(false);
+  };
+
   const handleOnDelete = async () => {
     if (!id) {
       handleError({ message: "Id doesn't exists" });
@@ -65,6 +74,7 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
       handleError(error as ResponseError);
     } finally {
       setLoading(false);
+      handleCloseDeleteDialog();
     }
     navigate(-1);
   };
@@ -73,7 +83,10 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
 
   return (
     <>
-      <ContactDetailCard onEdit={handleEdit} onDelete={handleOnDelete} />
+      <ContactDetailCard
+        onEdit={handleEdit}
+        onDelete={handleOpenDeleteDialog}
+      />
       <Dialog
         title="Edit Contact"
         open={openEditContactForm}
@@ -84,6 +97,22 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
           contactSchema={editContactSchema}
           initalData={contact}
         />
+      </Dialog>
+      <Dialog
+        title="Delete Contact"
+        open={openDeleteContactDialog}
+        onClose={handleCloseDeleteDialog}
+        variant="dark"
+        actions={[
+          <Button variant="error" onClick={handleOnDelete}>
+            Delete
+          </Button>,
+          <Button variant="light" onClick={handleCloseDeleteDialog}>
+            Cancel
+          </Button>,
+        ]}
+      >
+        Are you sure you want to delete this contact?
       </Dialog>
     </>
   );
