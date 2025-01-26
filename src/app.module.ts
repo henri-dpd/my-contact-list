@@ -14,6 +14,7 @@ dotenv.config();
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client/dist'),
       renderPath: 'react',
+      serveStaticOptions: {},
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
