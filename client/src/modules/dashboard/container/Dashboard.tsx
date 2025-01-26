@@ -4,7 +4,7 @@ import { useDashboardContext } from '../context/useDashboardContext';
 import Header from '../components/Header';
 import List from '../components/List';
 import Dialog from '@/core/components/dialog/Dialog';
-import UserRegistrationForm from '@/modules/contact-form/container/ContactFormContainer';
+import ContactFormContainer from '@/modules/contact-form/container/ContactFormContainer';
 import { newContactSchema } from '../schema/newContactSchema';
 import { ContactSchema } from '@/core/types/contact';
 import useLoading from '@/core/components/Loading/useLoading';
@@ -12,6 +12,8 @@ import useHandleErrors from '@/core/hooks/useHandleErrors';
 import contactService from '../service/contacts.service';
 import { ResponseError } from '@/core/types/service';
 import useFetchContactList from '../hooks/useFetchContactList';
+import { convertFileToBase64 } from '@/core/utils/base64';
+import { CreateContactDTO } from '../types/contactTypes';
 
 const Dashboard: React.FC = () => {
   const {
@@ -39,9 +41,13 @@ const Dashboard: React.FC = () => {
   };
 
   const handleCreateNewContact = async (data: ContactSchema) => {
+    const newContact: CreateContactDTO = {
+      ...data,
+      image: await convertFileToBase64(data.image),
+    };
     try {
       setLoading(true);
-      await contactService.createContact(data);
+      await contactService.createContact(newContact);
       dispatch({ type: 'SET_PAGE', payload: 1 });
       await fetchContactList();
       setLoading(false);
@@ -63,7 +69,7 @@ const Dashboard: React.FC = () => {
         open={openNewContactForm}
         onClose={handleCloseDialog}
       >
-        <UserRegistrationForm
+        <ContactFormContainer
           contactSchema={newContactSchema}
           onSubmit={handleCreateNewContact}
         />

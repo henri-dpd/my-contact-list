@@ -12,7 +12,7 @@ const ClickableCard: React.FC<Props> = ({ image, text, onClick }) => {
       className="bg-secondary flex flex-col items-center gap-2 m-4 p-4 rounded-none"
       onClick={onClick}
     >
-      <AvatarImage src={image} alt={`${text} photo`} />
+      <AvatarImage src={image} alt={`${text} photo`}  size="100" />
       <span>{text}</span>
     </button>
   );

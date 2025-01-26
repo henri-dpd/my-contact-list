@@ -5,7 +5,8 @@ interface Props {
   label: string;
   error?: string;
   props: object;
-  type?: 'text' | 'tel';
+  required?: boolean;
+  type?: 'text' | 'tel' | 'image';
 }
 
 const Input: React.FC<Props> = ({
@@ -13,14 +14,23 @@ const Input: React.FC<Props> = ({
   label,
   error,
   props,
+  required,
   type = 'text',
 }) => {
   return (
     <div className="flex justify-center flex flex-col">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label}{' '}
+        <span
+          className={`text-error align-middle ${required ? 'visible' : 'invisible'}`}
+        >
+          *
+        </span>
+      </label>
       <input
         className="rounded-[10px] w-full h-[32px]"
         type={type}
+        required={required}
         {...props}
       />
       {error && <p className="text-xs italic text-red-500">{error}</p>}

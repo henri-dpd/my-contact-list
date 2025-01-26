@@ -18,23 +18,27 @@ export class ContactsService {
 
   create(createContactDto: CreateContactDto): Promise<ContactResponse> {
     const newContact = this.contactRepository.create(createContactDto);
-    return this.contactRepository.save(newContact);
+    return this.contactRepository.save(new ContactResponse(newContact));
   }
 
   async findAll(filters: IFilter): Promise<PaginatedContactResponse> {
     const skip = filters.page > 0 ? filters.page - 1 : 0;
-    const [items, total] = await this.contactRepository.findAndCount({
+    const [list, total] = await this.contactRepository.findAndCount({
       take: 10,
       skip: skip,
       where: { name: Like(`%${filters.search ?? ''}%`) },
       select: { name: true, id: true, image: true, phone: true },
     });
     const page = filters.page > 0 ? +filters.page : 1;
+    const items = list.map((item) => new ContactResponse(item));
     return { items, page, total };
   }
 
   async findOne(id: string): Promise<ContactResponse | null> {
-    return await this.contactRepository.findOne({ where: { id: `${id}` } });
+    const contact = await this.contactRepository.findOne({
+      where: { id: `${id}` },
+    });
+    return contact ? new ContactResponse(contact) : null;
   }
 
   async update(

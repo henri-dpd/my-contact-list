@@ -14,6 +14,14 @@ export type ContactItem = {
 
 export type ContactSchema = {
   name: string;
+  image?: File[];
   phone: string;
   biography?: string;
+};
+
+export const defaultContactSchema: ContactSchema = {
+  name: '',
+  image: [],
+  phone: '',
+  biography: '',
 };

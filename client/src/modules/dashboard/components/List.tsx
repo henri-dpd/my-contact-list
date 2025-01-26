@@ -31,6 +31,7 @@ const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
         {state.items?.map((item) => (
           <ClickableCard
             text={item.name}
+            image={item.image}
             key={item.id}
             onClick={() => {
               navigate(`/${item.id}`);

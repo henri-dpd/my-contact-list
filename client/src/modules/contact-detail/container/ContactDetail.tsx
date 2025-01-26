@@ -5,14 +5,15 @@ import contactService from '@/modules/dashboard/service/contacts.service';
 import { ResponseError } from '@/core/types/service';
 import useHandleErrors from '@/core/hooks/useHandleErrors';
 import Dialog from '@/core/components/dialog/Dialog';
-import UserRegistrationForm from '@/modules/contact-form/container/ContactFormContainer';
+import ContactFormContainer from '@/modules/contact-form/container/ContactFormContainer';
 import { editContactSchema } from '../schema/editContactSchema';
-import { useState } from 'react';
-import { ContactSchema } from '@/core/types/contact';
+import { useMemo, useState } from 'react';
+import { ContactSchema, defaultContactSchema } from '@/core/types/contact';
 import useFetchContactDetail from '../hooks/useFetchContactDetail';
 import { useContactDetailContext } from '../context/useContactDetailContext';
 import Loading from '@/core/components/Loading/Loading';
 import Button from '@/core/components/button/Button';
+import { convertBase64ToFile, convertFileToBase64 } from '@/core/utils/base64';
 
 interface Props {
   id?: string;
@@ -29,6 +30,17 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
     state: { contact },
   } = useContactDetailContext();
 
+  const currentContact = useMemo<ContactSchema>(
+    () =>
+      contact
+        ? {
+            ...contact,
+            image: convertBase64ToFile(contact?.image, `${contact.name} Photo`),
+          }
+        : defaultContactSchema,
+    [contact],
+  );
+
   const handleEdit = () => {
     setOpenEditContactForm(true);
   };
@@ -43,7 +55,8 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
     }
     try {
       setLoading(true);
-      await contactService.editContact(id, data);
+      const contact = { ...data, image: await convertFileToBase64(data.image) };
+      await contactService.editContact(id, contact);
       await fetchContactDetail();
       setLoading(false);
       handleCloseDialog();
@@ -92,10 +105,10 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
         open={openEditContactForm}
         onClose={handleCloseDialog}
       >
-        <UserRegistrationForm
+        <ContactFormContainer
           onSubmit={handleOnEditContact}
           contactSchema={editContactSchema}
-          initalData={contact}
+          initalData={currentContact}
         />
       </Dialog>
       <Dialog
@@ -103,14 +116,16 @@ const ContactDetail: React.FC<Props> = ({ id }) => {
         open={openDeleteContactDialog}
         onClose={handleCloseDeleteDialog}
         variant="dark"
-        actions={[
-          <Button variant="error" onClick={handleOnDelete}>
-            Delete
-          </Button>,
-          <Button variant="light" onClick={handleCloseDeleteDialog}>
-            Cancel
-          </Button>,
-        ]}
+        actions={
+          <>
+            <Button variant="error" onClick={handleOnDelete}>
+              Delete
+            </Button>
+            <Button variant="light" onClick={handleCloseDeleteDialog}>
+              Cancel
+            </Button>
+          </>
+        }
       >
         Are you sure you want to delete this contact?
       </Dialog>

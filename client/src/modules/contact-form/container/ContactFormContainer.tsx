@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { ObjectSchema } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/core/components/button/Button';
-import { ContactSchema } from '@/core/types/contact';
+import { ContactSchema, defaultContactSchema } from '@/core/types/contact';
 import Input from '@/core/components/inputs/Input';
 import TextArea from '@/core/components/inputs/TextArea';
+import FileInput from '@/core/components/inputs/FileInput';
 
 interface Props {
   initalData?: ContactSchema;
@@ -13,7 +14,7 @@ interface Props {
   onSubmit: (data: ContactSchema) => void;
 }
 
-const UserRegistrationForm: React.FC<Props> = ({
+const ContactFormContainer: React.FC<Props> = ({
   contactSchema,
   initalData,
   onSubmit,
@@ -24,7 +25,7 @@ const UserRegistrationForm: React.FC<Props> = ({
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactSchema),
-    defaultValues: initalData,
+    defaultValues: initalData ?? defaultContactSchema,
   });
 
   return (
@@ -35,13 +36,21 @@ const UserRegistrationForm: React.FC<Props> = ({
           label="Name"
           props={register('name')}
           error={errors.name?.message}
+          required
         />
         <Input
           name="phone"
           label="Phone Number"
           props={register('phone')}
           error={errors.phone?.message}
+          required
           type="tel"
+        />
+        <FileInput
+          name="image"
+          label="Photo"
+          props={register('image')}
+          error={errors.name?.message}
         />
         <TextArea
           name="biography"
@@ -63,4 +72,4 @@ const UserRegistrationForm: React.FC<Props> = ({
   );
 };
 
-export default UserRegistrationForm;
+export default ContactFormContainer;

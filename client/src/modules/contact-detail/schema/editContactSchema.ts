@@ -1,4 +1,4 @@
-import { object, string } from 'yup';
+import { mixed, object, string } from 'yup';
 
 export const editContactSchema = object().shape({
   name: string()
@@ -9,4 +9,5 @@ export const editContactSchema = object().shape({
     .matches(RegExp(/^\d{10}$/), 'Phone invalid')
     .required('Phone number required'),
   biography: string(),
+  image: mixed(),
 });
