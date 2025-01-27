@@ -58,7 +58,7 @@ To run the application, use the following commands:
 To create images and run the container, execute the following command:
 
 ```bash
-docker-compose up -d
+docker-compose up
 ```
 
 ## Running Unit Tests
