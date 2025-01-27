@@ -1,4 +1,5 @@
 import React from 'react';
+import { InputMask } from '@react-input/mask';
 
 interface Props {
   name: string;
@@ -9,7 +10,7 @@ interface Props {
   type?: 'text' | 'tel' | 'image';
 }
 
-const Input: React.FC<Props> = ({
+const PhoneInput: React.FC<Props> = ({
   name,
   label,
   error,
@@ -22,20 +23,23 @@ const Input: React.FC<Props> = ({
       <label htmlFor={name}>
         {label}{' '}
         <span
-          className={`text-light  align-middle ${required ? 'visible' : 'invisible'}`}
+          className={`text-light align-middle ${required ? 'visible' : 'invisible'}`}
         >
           *
         </span>
       </label>
-      <input
+
+      <InputMask
         className="rounded-[10px] w-full h-[32px]"
         type={type}
         required={required}
         {...props}
+        mask="+1 (___) ___-____"
+        replacement={{ _: /\d/ }}
       />
       {error && <p className="text-xs italic text-red-500">{error}</p>}
     </div>
   );
 };
 
-export default Input;
+export default PhoneInput;

@@ -1,6 +1,5 @@
 import Button from '@/core/components/button/Button';
 import AvatarImage from '@/core/components/images/AvatarImage';
-import { formatPhone } from '@/core/utils/phone';
 import React from 'react';
 
 interface ContactInformationProps {
@@ -26,7 +25,7 @@ const ContactInformation: React.FC<ContactInformationProps> = ({
           <h1 className="inline-flex text-3xl text-darkgrey font-bold mb-1 pr-8">
             {name}
           </h1>
-          <span className="text-darkgrey font-bold">{formatPhone(phone)}</span>
+          <span className="text-darkgrey font-bold">{phone}</span>
         </div>
         <div className="flex flex-row justify-end gap-8">
           <Button onClick={onEdit}>Edit</Button>

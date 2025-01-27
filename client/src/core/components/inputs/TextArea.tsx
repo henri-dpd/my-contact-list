@@ -5,12 +5,20 @@ interface Props {
   label: string;
   error?: string;
   props: object;
+  required?: boolean;
 }
 
-const TextArea: React.FC<Props> = ({ name, label, error, props }) => {
+const TextArea: React.FC<Props> = ({ name, label, error, required, props }) => {
   return (
     <div className="flex justify-center flex flex-col">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>
+        {label}{' '}
+        <span
+          className={`text-light  align-middle ${required ? 'visible' : 'invisible'}`}
+        >
+          *
+        </span>
+      </label>
       <textarea
         className="rounded-[10px] w-full h-[32px] min-h-[100px]"
         {...props}

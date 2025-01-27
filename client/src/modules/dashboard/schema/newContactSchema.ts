@@ -5,8 +5,7 @@ export const newContactSchema = object().shape({
     .min(3, 'name must be at least 3 characters')
     .required('name is required'),
   phone: string()
-    .length(10, 'Phone invalid')
-    .matches(RegExp(/^\d{10}$/), 'Phone invalid')
+    .matches(/^\+1 \(\d{3}\) \d{3}-\d{4}$/, 'Phone invalid')
     .required('Phone number required'),
   image: mixed(),
   biography: string(),

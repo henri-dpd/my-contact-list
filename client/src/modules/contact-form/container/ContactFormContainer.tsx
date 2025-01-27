@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '@/core/components/button/Button';
 import { ContactSchema, defaultContactSchema } from '@/core/types/contact';
 import Input from '@/core/components/inputs/Input';
+import PhoneInput from '@/core/components/inputs/PhoneInput';
 import TextArea from '@/core/components/inputs/TextArea';
 import FileInput from '@/core/components/inputs/FileInput';
 
@@ -38,7 +39,7 @@ const ContactFormContainer: React.FC<Props> = ({
           error={errors.name?.message}
           required
         />
-        <Input
+        <PhoneInput
           name="phone"
           label="Phone Number"
           props={register('phone')}
