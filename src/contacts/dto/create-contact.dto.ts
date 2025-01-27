@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { IsNotEmpty, IsPhoneNumber, IsString, Length } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, Length } from 'class-validator';
+import { IsCustomPhoneNumber } from 'src/common/validator/IsPhoneNumber';
 
 export class CreateContactDto {
   @IsNotEmpty()
@@ -10,12 +11,14 @@ export class CreateContactDto {
   name: string;
 
   @IsNotEmpty()
-  @IsPhoneNumber()
+  @IsCustomPhoneNumber()
   phone: string;
 
   @IsString()
+  @IsOptional()
   image?: string;
 
   @IsString()
+  @IsOptional()
   biography: string;
 }

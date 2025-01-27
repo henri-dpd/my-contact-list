@@ -35,7 +35,7 @@ describe('ContactsController', () => {
   it('should create a contact', async () => {
     const createContactDto: CreateContactDto = {
       name: 'John Doe',
-      phone: '1234567890',
+      phone: '+1 (800) 800-8080',
       biography: 'A nice guy',
     };
     const result = { id: '1', ...createContactDto };
@@ -51,7 +51,7 @@ describe('ContactsController', () => {
 
   it('should return an array of contacts', async () => {
     const result: PartialContactResponse[] = [
-      { id: '1', name: 'John Doe', phone: '1234567890' },
+      { id: '1', name: 'John Doe', phone: '+1 (800) 800-8080' },
     ];
     const paginatedResult = {
       items: result,
@@ -78,7 +78,7 @@ describe('ContactsController', () => {
     const id = '1';
     const result: CreateContactDto = {
       name: 'John Doe',
-      phone: '123456789',
+      phone: '+1 (800) 800-8080',
       biography: 'A nice guy',
     };
 

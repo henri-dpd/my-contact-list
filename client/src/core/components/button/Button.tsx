@@ -1,15 +1,6 @@
 import { ColorTheme, Variant } from '@/core/types/theme';
 import { Img } from 'react-image';
 
-interface Props {
-  onClick?: (e?: React.MouseEvent) => void;
-  className?: string;
-  children?: React.ReactNode;
-  startIcon?: string;
-  variant?: Variant;
-  type?: 'submit' | 'button' | 'reset';
-}
-
 const BUTTON_THEME: Record<Variant, ColorTheme> = {
   primary: {
     bg: 'bg-primary',
@@ -31,18 +22,32 @@ const BUTTON_THEME: Record<Variant, ColorTheme> = {
   },
 };
 
+interface Props {
+  onClick?: (e?: React.MouseEvent) => void;
+  className?: string;
+  children?: React.ReactNode;
+  startIcon?: string;
+  variant?: Variant;
+  type?: 'submit' | 'button' | 'reset';
+  disabled?: boolean;
+}
+
 const Button: React.FC<Props> = ({
   onClick,
   startIcon,
   className = '',
   children,
   variant = 'primary',
+  disabled = false,
   type,
 }) => {
   return (
     <button
+      disabled={disabled}
       onClick={onClick}
-      className={`flex flex-row gap-1 justify-center items-center ${BUTTON_THEME[variant].color} ${BUTTON_THEME[variant].border} ${BUTTON_THEME[variant].bg} rounded-[1rem] px-10 ${className}`}
+      className={`flex flex-row gap-1 justify-center items-center rounded-[1rem] px-10 ${className}
+                  ${BUTTON_THEME[variant].color} ${BUTTON_THEME[variant].border} ${BUTTON_THEME[variant].bg}
+                  ${disabled ? 'bg-gray-400 text-gray-200 cursor-not-allowed opacity-60' : ''}`}
       type={type}
     >
       {startIcon && <Img src={startIcon} className="max-h-6" />}

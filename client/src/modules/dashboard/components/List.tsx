@@ -39,7 +39,11 @@ const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
           />
         ))}
       </div>
-      <Button onClick={onLoadMore} className="mt-10 px-20 mx-auto">
+      <Button
+        onClick={onLoadMore}
+        disabled={!state.total || state.total <= 10}
+        className="mt-10 px-20 mx-auto"
+      >
         Load More
       </Button>
     </div>
