@@ -20,7 +20,7 @@ export class ContactsService {
   create(createContactDto: CreateContactDto): Promise<ContactResponse> {
     this.logger.verbose(`Create a new Contact`);
     const newContact = this.contactRepository.create(createContactDto);
-    this.logger.log(`New Contact created with id: ${newContact?.id}`);
+    this.logger.log(`New Contact created: ${newContact?.name}`);
     return this.contactRepository.save(new ContactResponse(newContact));
   }
 

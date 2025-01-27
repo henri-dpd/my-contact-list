@@ -21,8 +21,10 @@ class ApiService {
   onSuccess = <T>(response: AxiosResponse<T>): Promise<T> =>
     Promise.resolve(response.data);
 
-  onError = (error: AxiosError): Promise<never> => {
-    return Promise.reject(new ResponseError(error.message));
+  onError = (error: AxiosError<ResponseError>): Promise<never> => {
+    return Promise.reject(
+      new ResponseError(error.response?.data?.message ?? error.message),
+    );
   };
 
   get = <U>(resource: string, config?: AxiosRequestConfig) =>
