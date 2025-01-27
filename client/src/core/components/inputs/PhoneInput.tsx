@@ -30,7 +30,7 @@ const PhoneInput: React.FC<Props> = ({
       </label>
 
       <InputMask
-        className="rounded-[10px] w-full h-[32px]"
+        className="rounded-[10px] w-full h-[32px] text-dark dark:text-light"
         type={type}
         required={required}
         {...props}

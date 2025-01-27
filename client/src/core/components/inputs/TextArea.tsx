@@ -20,7 +20,7 @@ const TextArea: React.FC<Props> = ({ name, label, error, required, props }) => {
         </span>
       </label>
       <textarea
-        className="rounded-[10px] w-full h-[32px] min-h-[100px]"
+        className="rounded-[10px] w-full h-[32px] min-h-[100px] text-dark dark:text-light"
         {...props}
       />
       {error && <p className="text-xs italic text-red-500">{error}</p>}
