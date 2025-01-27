@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useDashboardContext } from '../context/useDashboardContext';
 import Button from '@/core/components/button/Button';
 import ClickableCard from '@/core/components/cards/ClickableCard';
@@ -13,8 +13,14 @@ interface Props {
 }
 
 const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
-  const { state } = useDashboardContext();
+  const {
+    state: { items, prevItems, total, page },
+  } = useDashboardContext();
   const navigate = useNavigate();
+  const list = useMemo(
+    () => [...(prevItems ?? []), ...(items ?? [])],
+    [items, prevItems],
+  );
 
   return (
     <div className="flex flex-col justify-start items-start">
@@ -23,12 +29,12 @@ const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
       </Button>
       <br />
       <div className="flex flex-row flex-wrap justify-start items-start w-full ">
-        {state.items && state.items.length === 0 && (
+        {list.length === 0 && (
           <div className="w-full flex justify-center items-center">
             <Img src={EmptyContacts} alt="Contact List Empty" />
           </div>
         )}
-        {state.items?.map((item) => (
+        {list.map((item) => (
           <ClickableCard
             text={item.name}
             image={item.image}
@@ -41,7 +47,7 @@ const List: React.FC<Props> = ({ onAdd, onLoadMore }) => {
       </div>
       <Button
         onClick={onLoadMore}
-        disabled={!state.total || state.total <= 10}
+        disabled={!total || total <= page * 10}
         className="mt-10 px-20 mx-auto"
       >
         Load More
