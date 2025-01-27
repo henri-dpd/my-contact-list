@@ -27,13 +27,23 @@ To set up the project, follow these steps:
   npm install
   ```
 
-3. Install client dependencies:
+3. Set your server .env file
+```bash
+echo "MYSQL_HOST=127.0.0.1 `n MYSQL_PORT=3307 `n MYSQL_USERNAME=root `n MYSQL_PASSWORD=root `n MYSQL_DATABASE=contact-list-db `n PORT=3001" > .env
+```
+
+4. Install client dependencies:
   ```bash
   cd ./client
   npm install
   ```
 
-4. Build the client:
+5. Set your api url in the client .env file
+```bash
+echo "VITE_APP_API_URL='http://localhost:3001/api'" > .env
+```
+
+6. Build the client:
   ```bash
   npm run build
   ```
@@ -44,6 +54,7 @@ To run the application, use the following commands:
 
 1. Start the server:
   ```bash
+  docker run -d -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=contact-list-db -p 3307:3306 mysql
   npm run start:dev
   ```
 
@@ -60,6 +71,8 @@ To create images and run the container, execute the following command:
 ```bash
 docker-compose up
 ```
+
+After completing these steps, you can open the app in your browser at [http://localhost:3001](http://localhost:3001).
 
 ## Running Unit Tests
 
