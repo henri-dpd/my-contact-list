@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { ResponseError } from '@/core/types/service';
-import useLoading from '@/core/components/Loading/useLoading';
+import useLoading from '@/core/components/loading/useLoading';
 import contactService from '@/modules/dashboard/service/contacts.service';
 import { useContactDetailContext } from '../context/useContactDetailContext';
 import { useNavigate } from 'react-router-dom';

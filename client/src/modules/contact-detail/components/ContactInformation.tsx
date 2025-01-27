@@ -1,5 +1,5 @@
 import Button from '@/core/components/button/Button';
-import AvatarImage from '@/core/components/Images/AvatarImage';
+import AvatarImage from '@/core/components/images/AvatarImage';
 import { formatPhone } from '@/core/utils/phone';
 import React from 'react';
 

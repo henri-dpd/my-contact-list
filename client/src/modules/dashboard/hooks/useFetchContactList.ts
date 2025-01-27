@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDashboardContext } from '../context/useDashboardContext';
 import contactService from '../service/contacts.service';
 import { ResponseError } from '@/core/types/service';
-import useLoading from '@/core/components/Loading/useLoading';
+import useLoading from '@/core/components/loading/useLoading';
 import useHandleErrors from '@/core/hooks/useHandleErrors';
 
 const useFetchContactList = () => {

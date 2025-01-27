@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import ContactDetailCard from '../components/ContactDetailCard';
-import useLoading from '@/core/components/Loading/useLoading';
+import useLoading from '@/core/components/loading/useLoading';
 import contactService from '@/modules/dashboard/service/contacts.service';
 import { ResponseError } from '@/core/types/service';
 import useHandleErrors from '@/core/hooks/useHandleErrors';
@@ -11,7 +11,7 @@ import { useMemo, useState } from 'react';
 import { ContactSchema, defaultContactSchema } from '@/core/types/contact';
 import useFetchContactDetail from '../hooks/useFetchContactDetail';
 import { useContactDetailContext } from '../context/useContactDetailContext';
-import Loading from '@/core/components/Loading/Loading';
+import Loading from '@/core/components/loading/Loading';
 import Button from '@/core/components/button/Button';
 import { convertBase64ToFile, convertFileToBase64 } from '@/core/utils/base64';
 

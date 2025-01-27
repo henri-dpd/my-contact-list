@@ -1,4 +1,4 @@
-import AvatarImage from '../Images/AvatarImage';
+import AvatarImage from '../images/AvatarImage';
 
 interface Props {
   image?: string | string[];
