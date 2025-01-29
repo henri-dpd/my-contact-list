@@ -50,6 +50,11 @@ echo "VITE_APP_API_URL='http://localhost:3001/api'" > .env
 
 ## Running the Application in Development Mode
 
+### Requisites:
+- Install [Docker](https://docs.docker.com/desktop/)
+- Install [Nodejs](https://nodejs.org/es/download) v20.11.1
+- Install [Nestjs CLI](https://docs.nestjs.com/cli/overview)
+
 To run the application, use the following commands:
 
 1. Start the server:
