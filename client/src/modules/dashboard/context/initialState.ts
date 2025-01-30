@@ -10,6 +10,6 @@ export const initialState: DashboardState = {
   items: [],
   prevItems: [],
   total: 0,
-  page: 0,
+  page: 1,
   search: undefined,
 };
