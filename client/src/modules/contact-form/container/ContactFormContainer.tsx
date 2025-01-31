@@ -34,7 +34,7 @@ const ContactFormContainer: React.FC<Props> = ({
       <div className="flex flex-col gap-2">
         <Input
           name="name"
-          label="Name"
+          label="Full Name"
           props={register('name')}
           error={errors.name?.message}
           required
@@ -51,7 +51,7 @@ const ContactFormContainer: React.FC<Props> = ({
           name="image"
           label="Photo"
           props={register('image')}
-          error={errors.name?.message}
+          error={errors.image?.message}
         />
         <TextArea
           name="biography"
