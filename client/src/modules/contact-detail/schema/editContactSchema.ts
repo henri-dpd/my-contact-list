@@ -1,4 +1,5 @@
-import { FULL_NAME_REGEX, PHONE_REGEX } from '@/core/constants/regex';
+import { FULL_NAME_REGEX } from '@/core/constants/regex';
+import { isValidPhoneNumber } from 'react-phone-number-input';
 import { mixed, object, string } from 'yup';
 
 export const editContactSchema = object().shape({
@@ -8,8 +9,8 @@ export const editContactSchema = object().shape({
     .matches(FULL_NAME_REGEX, 'name have to be first name and last name')
     .required('name is required'),
   phone: string()
-    .matches(PHONE_REGEX, 'Phone invalid')
-    .required('Phone number required'),
+    .required('Phone number required')
+    .test('phone', (phone) => isValidPhoneNumber(phone)),
   biography: string(),
   image: mixed(),
 });

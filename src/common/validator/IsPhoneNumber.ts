@@ -6,13 +6,11 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { PHONE_REGEX } from '../constants/regex';
-
+import { isValidPhoneNumber } from 'libphonenumber-js';
 @ValidatorConstraint({ async: false })
 class IsCustomPhoneNumberConstraint implements ValidatorConstraintInterface {
   validate(phoneNumber: string) {
-    const phoneRegex = PHONE_REGEX;
-    return typeof phoneNumber === 'string' && phoneRegex.test(phoneNumber);
+    return typeof phoneNumber === 'string' && isValidPhoneNumber(phoneNumber);
   }
 
   defaultMessage() {

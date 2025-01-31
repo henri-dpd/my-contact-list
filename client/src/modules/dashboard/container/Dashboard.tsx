@@ -13,6 +13,7 @@ import contactService from '../service/contacts.service';
 import { ResponseError } from '@/core/types/service';
 import { convertFileToBase64 } from '@/core/utils/base64';
 import { CreateContactDTO } from '../types/contactTypes';
+import useFetchContactList from '../hooks/useFetchContactList';
 
 const Dashboard: React.FC = () => {
   const {
@@ -22,6 +23,7 @@ const Dashboard: React.FC = () => {
   const [openNewContactForm, setOpenNewContactForm] = useState(false);
   const { setLoading } = useLoading();
   const handleError = useHandleErrors();
+  const fetchContactList = useFetchContactList();
 
   const handleSearch = useDebouncedCallback((value: string) => {
     dispatch({ type: 'SET_SEARCH', payload: value });
@@ -48,6 +50,7 @@ const Dashboard: React.FC = () => {
       await contactService.createContact(newContact);
       dispatch({ type: 'CLEAN' });
       setLoading(false);
+      await fetchContactList();
       handleCloseDialog();
     } catch (error) {
       handleError(error as ResponseError);

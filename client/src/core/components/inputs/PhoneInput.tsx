@@ -1,22 +1,23 @@
+import { ContactSchema } from '@/core/types/contact';
 import React from 'react';
-import { InputMask } from '@react-input/mask';
+import { Control } from 'react-hook-form';
+import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
+import 'react-phone-number-input/style.css';
 
 interface Props {
   name: string;
   label: string;
   error?: string;
-  props: object;
+  control: Control<ContactSchema>;
   required?: boolean;
-  type?: 'text' | 'tel' | 'image';
 }
 
 const PhoneInput: React.FC<Props> = ({
   name,
   label,
   error,
-  props,
+  control,
   required,
-  type = 'text',
 }) => {
   return (
     <div className="flex justify-center flex flex-col">
@@ -29,13 +30,10 @@ const PhoneInput: React.FC<Props> = ({
         </span>
       </label>
 
-      <InputMask
-        className="rounded-[10px] w-full h-[32px] text-dark dark:text-light"
-        type={type}
-        required={required}
-        {...props}
-        mask="+1 (___) ___-____"
-        replacement={{ _: /\d/ }}
+      <PhoneInputWithCountry
+        defaultCountry="US"
+        name={name}
+        control={control}
       />
       {error && <p className="text-xs italic text-red-500">{error}</p>}
     </div>

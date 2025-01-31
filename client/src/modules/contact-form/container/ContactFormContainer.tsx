@@ -24,6 +24,7 @@ const ContactFormContainer: React.FC<Props> = ({
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm({
     resolver: yupResolver(contactSchema),
     defaultValues: initalData ?? defaultContactSchema,
@@ -42,10 +43,9 @@ const ContactFormContainer: React.FC<Props> = ({
         <PhoneInput
           name="phone"
           label="Phone Number"
-          props={register('phone')}
+          control={control}
           error={errors.phone?.message}
           required
-          type="tel"
         />
         <FileInput
           name="image"
